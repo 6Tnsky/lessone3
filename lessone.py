@@ -1,6 +1,5 @@
 import pygame
 import random
-
 pygame.init()
 
 SCREEN_WIDTH = 800
@@ -12,10 +11,10 @@ icon = pygame.image.load("img/image.png")
 pygame.display.set_icon(icon)
 
 target_img = pygame.image.load("img/tir.png")
-target_width = 80
+target_wight = 80
 target_height = 80
 
-target_x = random.randint(0, SCREEN_WIDTH - target_width)
+target_x = random.randint(0, SCREEN_WIDTH - target_wight)
 target_y = random.randint(0, SCREEN_HEIGHT - target_height)
 
 color = (247, 247, 247)
@@ -26,15 +25,11 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
-    # Получаем текущую позицию курсора
-    mouse_x, mouse_y = pygame.mouse.get_pos()
-
-    # Проверяем, находится ли курсор над целью
-    if target_x < mouse_x < target_x + target_width and target_y < mouse_y < target_y + target_height:
-        target_x = random.randint(0, SCREEN_WIDTH - target_width)
-        target_y = random.randint(0, SCREEN_HEIGHT - target_height)
-
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            if target_x < mouse_x < target_x + target_wight and target_y < mouse_y < target_y + target_height:
+                target_x = random.randint(0, SCREEN_WIDTH - target_wight)
+                target_y = random.randint(0, SCREEN_HEIGHT - target_height)
     screen.blit(target_img, (target_x, target_y))
     pygame.display.update()
 
